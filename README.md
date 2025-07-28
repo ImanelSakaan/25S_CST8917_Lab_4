@@ -13,10 +13,15 @@ We create the following:
 - **Azure Event Hubs** is a big data streaming platform and event ingestion service provided by Microsoft Azure.
 - **Function App** to analyze trips for patterns (like group rides, cash payments, or suspiciously short rides).
 
-<img width="930" height="272" alt="image" src="https://github.com/user-attachments/assets/fe080c24-00db-49a1-a068-82f42c37f8d4" />
+<img width="630" height="272" alt="image" src="https://github.com/user-attachments/assets/fe080c24-00db-49a1-a068-82f42c37f8d4" />
 
 
-## 📌 Function Purpose
+## 📌 Tasks
+## ✅ 1. Set Up Event Ingestion
+- Create an Event Hub and simulate sending trip events (use JSON format).
+- Configure Azure Logic App to trigger When events are available in Event Hub (use batch mode).
+
+
 
 This function receives JSON-formatted trip events from Event Hub (via Logic App), analyzes each trip based on distance, passenger count, and payment type, and returns structured insights.
 
