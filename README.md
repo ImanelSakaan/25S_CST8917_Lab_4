@@ -109,6 +109,47 @@ def analyze_trip(req: func.HttpRequest) -> func.HttpResponse:
         logging.error(f"Error processing trip data: {e}")
         return func.HttpResponse(f"Error: {str(e)}", status_code=400)
 ```
+Absolutely! Here's a **flowchart** representing the logical flow of your **Azure Function trip analysis app**, from receiving input to producing the insights.
+
+---
+
+### 📊 Azure Function Trip Analysis – Flowchart
+
+```mermaid
+flowchart TD
+    A[Start: HTTP Trigger from Logic App] --> B[Read JSON Payload]
+    B --> C{Is Input a List?}
+    C -- Yes --> D[Loop through each trip record]
+    C -- No --> E[Wrap single trip in list] --> D
+
+    D --> F[Extract trip details: vendorID, tripDistance, passengerCount, paymentType]
+
+    F --> G[Analyze trip]
+    G --> G1{tripDistance > 10?}
+    G1 -- Yes --> H1[Add 'LongTrip' to insights]
+    G1 -- No --> I1[Skip]
+
+    G --> G2{passengerCount > 4?}
+    G2 -- Yes --> H2[Add 'GroupRide']
+    G2 -- No --> I2[Skip]
+
+    G --> G3{paymentType == '2'?}
+    G3 -- Yes --> H3[Add 'CashPayment']
+    G3 -- No --> I3[Skip]
+
+    G3 --> G4{paymentType == '2' AND tripDistance < 1?}
+    G4 -- Yes --> H4[Add 'SuspiciousVendorActivity']
+    G4 -- No --> I4[Skip]
+
+    H1 & H2 & H3 & H4 --> J[Build response JSON with insights, summary, isInteresting]
+
+    J --> K{More records?}
+    K -- Yes --> D
+    K -- No --> L[Return JSON array as HTTP response]
+
+    L --> M[End]
+```
+
 
 
 ### ✅ 3. Add Logic App Processing
