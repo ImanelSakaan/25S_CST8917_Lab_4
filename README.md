@@ -1,17 +1,31 @@
 # 🚖 Real-Time Trip Monitoring Azure Function
-
-This Azure Function analyzes incoming taxi trip events to detect unusual patterns in real-time. It is used as part of a larger Logic App workflow for a transportation dispatch system.
 ## 📹 Demo Video
 
 👉 [Link to Demo Video](https://your-demo-video-link.com)
 
 ---
+Taxi dispatch networks generate large volumes of trip data in real time. To ensure service quality, safety, and operational insights, it's crucial to monitor this data as it arrives, analyze it immediately, and flag unusual patterns.
+
+We will implement a real-time event-driven system that:
+- Ingests taxi trip events from an Event Hub
+- Uses an Azure Function to analyze trips for patterns (like group rides, cash payments, or suspiciously short rides)
+- Routes this analysis through a Logic App
+- Posts rich Adaptive Cards to Microsoft Teams to alert operations staff
+
+This allows dispatchers and supervisors to:
+- Immediately spot anomalies
+- Monitor high-volume group rides
+- Track vendors with suspicious activity
+- Reduce manual review time
+
 ## 🔁 Example: Booking Processing Workflow
 
 We create the following:
 - **A namespace** is a container for all messaging components (queues and topics).
 - **Azure Event Hubs** is a big data streaming platform and event ingestion service provided by Microsoft Azure.
-- **Function App** to analyze trips for patterns (like group rides, cash payments, or suspiciously short rides).
+- **Azure Logic Apps** enables you to automate workflows using a visual designer by connecting various services and triggers, both within Azure and from external systems like Microsoft Teams, Outlook, Salesforce, SQL, and Event Hubs.
+- **Function App** to analyze incoming taxi trips for patterns (like group rides, cash payments, or suspiciously short rides), to detect unusual patterns in real-time.
+
 
 <img width="630" height="272" alt="image" src="https://github.com/user-attachments/assets/fe080c24-00db-49a1-a068-82f42c37f8d4" />
 
@@ -25,7 +39,7 @@ We create the following:
 
 This function receives JSON-formatted trip events from Event Hub (via Logic App), analyzes each trip based on distance, passenger count, and payment type, and returns structured insights.
 
-## 🔍 Analysis Criteria
+## 🔍 2. Create Azure Function
 
 The function flags a trip as "interesting" if it meets any of the following:
 
@@ -34,7 +48,7 @@ The function flags a trip as "interesting" if it meets any of the following:
 - `CashPayment`: Payment type is `2` (cash)
 - `SuspiciousVendorActivity`: Cash payment and distance < 1 mile
 
-## 🔁 Sample Input
+## 🔁 3. Add Logic App Processing
 
 ```json
 [
@@ -49,7 +63,7 @@ The function flags a trip as "interesting" if it meets any of the following:
 ]
 ````
 
-## ✅ Sample Output
+## 📁 4. Post Adaptive Cards to Microsoft Teams
 
 ```json
 [
@@ -154,30 +168,8 @@ Would you like a downloadable `.zip` or `.tar.gz` of these three files bundled f
 
 
 
-##  Scenario: Real-Time Trip Monitoring for Taxi Dispatch System
 
-Modern transportation systems—like ride-sharing platforms and taxi dispatch networks—generate large volumes of trip data in real time. To ensure service quality, safety, and operational insights, it's crucial to monitor this data as it arrives, analyze it immediately, and flag unusual patterns.
 
-Imagine you're working for a transportation technology company that supports a large network of taxi services across the city. Your job is to help the operations team by automatically analyzing incoming trip data and notifying them about any trips that might be unusual or suspicious.
-
-Your system will monitor data such as:
-
-- Number of passengers
-- Trip distance
-- Payment method
-- Vendor ID
-
-You will implement a real-time event-driven system that:
-- Ingests taxi trip events from an Event Hub
-- Uses an Azure Function to analyze trips for patterns (like group rides, cash payments, or suspiciously short rides)
-- Routes this analysis through a Logic App
-- Posts rich Adaptive Cards to Microsoft Teams to alert operations staff
-
-This allows dispatchers and supervisors to:
-- Immediately spot anomalies
-- Monitor high-volume group rides
-- Track vendors with suspicious activity
-- Reduce manual review time
 
 Example Use Cases:
 - A vendor frequently reports short trips (possible fraud)
