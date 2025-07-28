@@ -1,4 +1,153 @@
-# CST8917 Lab 4: Real-Time Trip Event Analysis
+# 🚖 Real-Time Trip Monitoring Azure Function
+
+This Azure Function analyzes incoming taxi trip events to detect unusual patterns in real-time. It is used as part of a larger Logic App workflow for a transportation dispatch system.
+## 📹 Demo Video
+
+👉 [Link to Demo Video](https://your-demo-video-link.com)
+
+---
+## 🔁 Example: Booking Processing Workflow
+
+We create the following:
+- **A namespace** is a container for all messaging components (queues and topics).
+- **Azure Event Hubs** is a big data streaming platform and event ingestion service provided by Microsoft Azure.
+- **Function App** to analyze trips for patterns (like group rides, cash payments, or suspiciously short rides).
+
+<img width="930" height="272" alt="image" src="https://github.com/user-attachments/assets/fe080c24-00db-49a1-a068-82f42c37f8d4" />
+
+
+## 📌 Function Purpose
+
+This function receives JSON-formatted trip events from Event Hub (via Logic App), analyzes each trip based on distance, passenger count, and payment type, and returns structured insights.
+
+## 🔍 Analysis Criteria
+
+The function flags a trip as "interesting" if it meets any of the following:
+
+- `LongTrip`: Distance > 10 miles
+- `GroupRide`: More than 4 passengers
+- `CashPayment`: Payment type is `2` (cash)
+- `SuspiciousVendorActivity`: Cash payment and distance < 1 mile
+
+## 🔁 Sample Input
+
+```json
+[
+  {
+    "ContentData": {
+      "vendorID": "V001",
+      "tripDistance": 0.6,
+      "passengerCount": 2,
+      "paymentType": "2"
+    }
+  }
+]
+````
+
+## ✅ Sample Output
+
+```json
+[
+  {
+    "vendorID": "V001",
+    "tripDistance": 0.6,
+    "passengerCount": 2,
+    "paymentType": "2",
+    "insights": ["CashPayment", "SuspiciousVendorActivity"],
+    "isInteresting": true,
+    "summary": "2 flags: CashPayment, SuspiciousVendorActivity"
+  }
+]
+```
+
+## 🧪 How to Run Locally
+
+1. Install dependencies:
+
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+2. Run the function locally using Azure Functions Core Tools:
+
+   ```bash
+   func start
+   ```
+
+3. Send a test request:
+
+   ```bash
+   curl -X POST http://localhost:7071/api/analyze_trip \
+        -H "Content-Type: application/json" \
+        -d '[{"ContentData": {"vendorID": "V001", "tripDistance": 12, "passengerCount": 5, "paymentType": "2"}}]'
+   ```
+
+## 📁 Project Structure
+
+```
+/trip-analyzer-function/
+│
+├── __init__.py              # Main Azure Function code
+├── function.json            # Trigger definition (optional if using VS Code)
+├── requirements.txt         # Python dependencies
+└── README.md                # This file
+```
+
+## 📬 Output Usage
+
+The function output is passed to an Azure Logic App, which:
+
+* Iterates over each result
+* Posts an Adaptive Card to Microsoft Teams based on insights
+
+
+
+```
+
+Would you like a downloadable `.zip` or `.tar.gz` of these three files bundled for submission?
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 ##  Scenario: Real-Time Trip Monitoring for Taxi Dispatch System
 
