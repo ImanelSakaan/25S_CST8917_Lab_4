@@ -148,6 +148,7 @@ flowchart TD
     K -- No --> L[Return JSON array as HTTP response]
 
     L --> M[End]
+
 ```
 
 
@@ -163,6 +164,18 @@ flowchart TD
 
 
 ### ✅ 4. Post Adaptive Cards to Microsoft Teams
+
+### 💬 yellowtaxiapp: is a Logic App that:
+-  Listens to trip data (probably from Event Hubs or HTTP requests),
+-  Sends it to an Azure Function for analysis,
+-  Posts results to a Teams channel, email, or logs them.
+
+  use the following post cards:
+- Not Interesting Trip Card
+- Interesting Trip Card
+- Suspicious Vendor Activity
+
+### ✅ 5. Microsoft Teams Test
 
 <div align="center">  
   <img width="879" height="334" alt="image" src="https://github.com/user-attachments/assets/27bf6975-f5dc-4317-98be-b7e37f359667" />
