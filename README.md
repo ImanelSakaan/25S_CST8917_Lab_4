@@ -80,6 +80,8 @@ The function flags a trip as "interesting" if it meets any of the following:
 ```
 
 ## 🧪 How to Run Locally
+<img width="883" height="754" alt="image" src="https://github.com/user-attachments/assets/e527228c-6f37-4720-8c86-4f6aeb56580b" />
+
 
 1. Install dependencies:
 
