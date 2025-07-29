@@ -178,7 +178,7 @@ flowchart TD
 ### ✅ 5. Microsoft Teams Test
 
 <div align="center">  
-  <img width="879" height="334" alt="image" src="https://github.com/user-attachments/assets/27bf6975-f5dc-4317-98be-b7e37f359667" />
+  <img width="719" height="567" alt="image" src="https://github.com/user-attachments/assets/847990c0-a998-4f29-8810-19ff2a79e969" />
 </div>
 
 
